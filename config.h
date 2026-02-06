@@ -19,12 +19,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #pragma once
-
+#include <avr/io.h>
 // #define USE_MATRIX_I2C
 
 // #define QUICK_TAP_TERM 0
 // #define TAPPING_TERM 100
-
+#define NO_SEND_STRING_RANDOM_BASE64
 #ifdef RGB_MATRIX_ENABLE
 #    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #    define RGB_MATRIX_KEYPRESSES
