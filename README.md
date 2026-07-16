@@ -100,7 +100,7 @@ Hold either `NAV/Esc` thumb.
 ├─────────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────────┤
 │ShiftTab │ GUI │ Alt │ Ctrl│Shift│ C-l │   │Left │Down │ Up  │Right│Home │ End     │
 ├─────────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────────┤
-│tmux C-s │ [d  │ ]d  │tmux[│Copy │Paste│   │A-b  │PgDn │PgUp │A-f  │Bspc │ Delete  │
+│ C-l     │ [d  │ ]d  │tmux[│Copy │Paste│   │A-b  │PgDn │PgUp │A-f  │Bspc │ Delete  │
 └─────────┴─────┴─────┴─────┴─────┴─────┘   └─────┴─────┴─────┴─────┴─────┴─────────┘
 ```
 
@@ -111,7 +111,6 @@ Notes:
 - Arrow keys use true Vim H/J/K/L geometry on the right hand: H=Left, J=Down, K=Up, L=Right. NAV is held by the opposite hand to reduce right-hand fatigue.
 - `C-l` clears terminal screens without assuming the shell prompt is empty.
 - `[d` and `]d` are emitted as clean diagnostic sequences for Neovim.
-- `tmux C-s` sends `Ctrl-S` then `Ctrl-S`; with `bind C-s send-prefix`, tmux forwards a literal prefix to nested sessions.
 - `tmux[` sends `Ctrl-S`, waits briefly, then sends `[`. This depends on tmux prefix `C-s`.
 - Copy/Paste are `Ctrl-Shift-C` and `Ctrl-Shift-V` for terminal emulators.
 - Word movement is `Alt-B` and `Alt-F`, matching readline/zsh behavior.
@@ -276,7 +275,7 @@ rm keyboards/crkbd/keymaps/my_keymap/.gitignore
 - Base: Tab, thumb Esc, Backspace, Space/Alt, Enter/Alt, Quote, both Shifts, left/right pinky Ctrl, mirrored NAV, and mirrored SYM.
 - Rust symbols: `::`, `->`, `=>`, `<>`, `&`, `|`, `_`, `?`, `()`, `[]`, `{}`.
 - Terminal: pinky `Ctrl-C`, `Ctrl-R`, `Ctrl-W`, `Ctrl-U`, `Ctrl-L`, thumb/layer `Alt-B`, `Alt-F`, terminal copy/paste.
-- tmux: prefix, send-prefix, copy mode, no stuck Ctrl, no XOFF freeze with `stty -ixon`.
+- tmux: copy mode, terminal clear, no stuck Ctrl, no XOFF freeze with `stty -ixon`.
 - Neovim: thumb Escape, `[d`, `]d`, H/J/K/L arrows, no firmware `:q` injection.
 - i3: workspaces 1 through 9 on NAV, workspace 10 on Adjust, with current Mod1 behavior.
 - Browser: plain Tab, Shift-Tab, previous tab, next tab, clipboard shortcuts, navigation keys.
