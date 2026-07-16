@@ -19,6 +19,10 @@ qmk lint -kb crkbd/rev1 -km my_keymap
 qmk compile -kb crkbd/rev1 -km my_keymap
 ```
 
+## Cheat Sheet
+
+Open `CHEATSHEET.md` for a usage-focused guide covering thumbs, NAV, SYM, browser, i3, Neovim, tmux, and zsh.
+
 ## Flash
 
 Do not flash until the diff and compile result have been reviewed.
