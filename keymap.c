@@ -86,8 +86,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // SYM: Rust-oriented rolls: ::, ->, =>, <>, and adjacent (), [], {} pairs.
     [_SYM] = LAYOUT_split_3x6_3(
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_TILD,
-        KC_PIPE, KC_COLN, KC_MINS, KC_EQL,  KC_LT,   KC_GT,      KC_LPRN, KC_RPRN, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR,
-        KC_AMPR, KC_UNDS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,     KC_PERC, KC_CIRC, KC_ASTR, KC_PLUS, KC_QUES, KC_BSLS,
+        KC_PIPE, KC_AMPR, KC_MINS, KC_EQL,  KC_LT,   KC_GT,      KC_LPRN, KC_RPRN, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR,
+        KC_EXLM, KC_UNDS, KC_COLN, KC_AT,   KC_HASH, KC_DLR,     KC_PERC, KC_CIRC, KC_ASTR, KC_PLUS, KC_QUES, KC_BSLS,
                                   KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS
     ),
 
