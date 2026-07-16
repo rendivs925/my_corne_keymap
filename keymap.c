@@ -15,6 +15,7 @@ enum custom_keycodes {
     NEXT_DIAG,
     TMUX_COPY_MODE,
     TMUX_SEND_PREFIX,
+    TERM_CLEAR_CMD,
 };
 
 #define NAV     LT(_NAV, KC_ESC)
@@ -79,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = LAYOUT_split_3x6_3(
         KC_TRNS,  WM(KC_1), WM(KC_2), WM(KC_3), WM(KC_4), WM(KC_5),      WM(KC_6), WM(KC_7),    WM(KC_8),     WM(KC_9),  TAB_PREV, TAB_NEXT,
         TAB_BACK, KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  TERM_CLEAR,    KC_LEFT,  KC_DOWN,     KC_UP,        KC_RGHT,  KC_HOME,  KC_END,
-        TERM_CLEAR, PREV_DIAG, NEXT_DIAG, TMUX_COPY_MODE, TERM_COPY, TERM_PASTE,  WORD_LEFT, KC_PGDN, KC_PGUP, WORD_RIGHT, KC_BSPC, KC_DEL,
+        TERM_CLEAR_CMD, PREV_DIAG, NEXT_DIAG, TMUX_COPY_MODE, TERM_COPY, TERM_PASTE,  WORD_LEFT, KC_PGDN, KC_PGUP, WORD_RIGHT, KC_BSPC, KC_DEL,
                                   KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS
     ),
 
@@ -126,6 +127,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             tap_clean_16(C(KC_S));
             wait_ms(10);
             tap_clean_16(C(KC_S));
+            return false;
+
+        case TERM_CLEAR_CMD:
+            tap_clean_16(KC_C);
+            tap_clean_16(KC_L);
+            tap_clean_16(KC_E);
+            tap_clean_16(KC_A);
+            tap_clean_16(KC_R);
+            tap_clean_16(KC_ENT);
             return false;
     }
 

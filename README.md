@@ -100,7 +100,7 @@ Hold either `NAV/Esc` thumb.
 ├─────────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────────┤
 │ShiftTab │ GUI │ Alt │ Ctrl│Shift│ C-l │   │Left │Down │ Up  │Right│Home │ End     │
 ├─────────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────────┤
-│ C-l     │ [d  │ ]d  │tmux[│Copy │Paste│   │A-b  │PgDn │PgUp │A-f  │Bspc │ Delete  │
+│ clear   │ [d  │ ]d  │tmux[│Copy │Paste│   │A-b  │PgDn │PgUp │A-f  │Bspc │ Delete  │
 └─────────┴─────┴─────┴─────┴─────┴─────┘   └─────┴─────┴─────┴─────┴─────┴─────────┘
 ```
 
@@ -109,7 +109,8 @@ Notes:
 - `PrevT` / `NextT` are browser/application previous and next tab: `Ctrl-Shift-Tab` and `Ctrl-Tab`.
 - `ShiftTab` is plain `Shift-Tab` for reverse completion, browser forms, and UI focus movement.
 - Arrow keys use true Vim H/J/K/L geometry on the right hand: H=Left, J=Down, K=Up, L=Right. NAV is held by the opposite hand to reduce right-hand fatigue.
-- `C-l` clears terminal screens without assuming the shell prompt is empty.
+- `C-l` sends `Ctrl-L` for terminal redraw/clear and browser address-bar focus.
+- `clear` types `clear` and presses Enter, which works reliably inside and outside tmux when the shell prompt is active.
 - `[d` and `]d` are emitted as clean diagnostic sequences for Neovim.
 - `tmux[` sends `Ctrl-S`, waits briefly, then sends `[`. This depends on tmux prefix `C-s`.
 - Copy/Paste are `Ctrl-Shift-C` and `Ctrl-Shift-V` for terminal emulators.

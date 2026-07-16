@@ -32,7 +32,7 @@ Hold either `NAV/Esc`.
 ```text
 Tab       WM1  WM2  WM3  WM4  WM5      WM6   WM7   WM8   WM9   PrevTab  NextTab
 ShiftTab  GUI  Alt  Ctrl Shift C-l      Left  Down  Up    Right Home     End
-C-l       [d   ]d   tmux[ Copy Paste    A-b   PgDn  PgUp  A-f   Bspc     Del
+clear     [d   ]d   tmux[ Copy Paste    A-b   PgDn  PgUp  A-f   Bspc     Del
 ```
 
 Common use:
@@ -44,7 +44,8 @@ Shift-Tab           = NAV + LShift-position
 Browser prev tab    = NAV + P-position
 Browser next tab    = NAV + Backspace-position
 Arrows              = NAV + H/J/K/L
-Terminal clear      = NAV + G-position or NAV + bottom-left
+Ctrl-L              = NAV + G-position
+clear + Enter       = NAV + bottom-left
 Word left/right     = NAV + N-position / NAV + .-position
 ```
 
@@ -147,7 +148,7 @@ DevTools            = F12 on ADJ
 Firmware assumes tmux prefix is `Ctrl-S`.
 
 ```text
-Terminal clear      = NAV + bottom-left
+clear + Enter       = NAV + bottom-left
 tmux copy mode      = NAV + C-position
 ```
 
