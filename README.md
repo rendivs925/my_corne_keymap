@@ -33,25 +33,25 @@ Flash each half separately when needed. `QK_BOOT` normally enters the bootloader
 
 ```text
 ┌────────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬───────────┐
-│ Tab    │ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P │ Backspace │
+│ Esc    │ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P │ Backspace │
 ├────────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───────────┤
 │ LShift │ A │ S │ D │ F │ G │   │ H │ J │ K │ L │ ; │ Quote     │
 ├────────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼───────────┤
-│ LAlt   │ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ RShift    │
+│ LCtrl  │ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ RCtrl     │
 └────────┴───┴───┴───┴───┴───┘   └───┴───┴───┴───┴───┴───────────┘
 
-              LCtrl   NAV   Space  │  Enter   SYM   GUI/Escape
+              Alt   NAV   Enter  │  Space   SYM   RAlt
 ```
 
 Thumb behavior:
-- `LCtrl`: dedicated Control.
+- `Alt`: dedicated Left Alt.
 - `NAV`: momentary Navigation layer and part of tri-layer Adjust.
-- `Space`: dedicated Space.
-- `Enter`: dedicated Enter.
+- `Enter`: dedicated Enter on the left thumb.
+- `Space`: dedicated Space on the right thumb.
 - `SYM`: momentary Symbol layer and part of tri-layer Adjust.
-- `GUI/Escape`: tap Escape, hold Left GUI/Super.
+- `RAlt`: dedicated right-thumb Alt.
 
-Space, Enter, Quote, Shift, and alpha keys are deterministic. There are no home-row mods.
+Esc, Space, Enter, Quote, Shift, Ctrl, Alt, and alpha keys are deterministic. Ctrl lives on both outer pinkies; Alt lives on thumbs. There are no home-row mods or Base tap-hold keys.
 
 ## Symbol Layer
 
@@ -94,18 +94,19 @@ Hold the left `NAV` thumb.
 
 ```text
 ┌─────────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────────┐
-│ PrevTab │ WM1 │ WM2 │ WM3 │ WM4 │ WM5 │   │ WM6 │ WM7 │ WM8 │ WM9 │ WM0 │ NextTab │
+│ Tab     │ WM1 │ WM2 │ WM3 │ WM4 │ WM5 │   │ WM6 │ WM7 │ WM8 │ WM9 │ WM0 │ NextTab │
 ├─────────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────────┤
-│ Reserved│ GUI │ Alt │ Ctrl│Shift│ C-l │   │Home │Left │Down │ Up  │Right│ End     │
+│ PrevTab │ GUI │ Alt │ Ctrl│Shift│ C-l │   │Left │Down │ Up  │Right│Home │ End     │
 ├─────────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────────┤
-│ C-l     │ [d  │ ]d  │tmux[│Copy │Paste│   │PgDn │A-b  │A-f  │PgUp │Bspc │ Delete  │
+│tmux C-s │ [d  │ ]d  │tmux[│Copy │Paste│   │A-b  │PgDn │PgUp │A-f  │Bspc │ Delete  │
 └─────────┴─────┴─────┴─────┴─────┴─────┘   └─────┴─────┴─────┴─────┴─────┴─────────┘
 ```
 
 Notes:
-- Arrow keys use H/J/K/L geometry on the right hand.
+- Arrow keys use true Vim H/J/K/L geometry on the right hand: H=Left, J=Down, K=Up, L=Right. NAV is held by the opposite hand to reduce right-hand fatigue.
 - `C-l` clears terminal screens without assuming the shell prompt is empty.
 - `[d` and `]d` are emitted as clean diagnostic sequences for Neovim.
+- `tmux C-s` sends `Ctrl-S` then `Ctrl-S`; with `bind C-s send-prefix`, tmux forwards a literal prefix to nested sessions.
 - `tmux[` sends `Ctrl-S`, waits briefly, then sends `[`. This depends on tmux prefix `C-s`.
 - Copy/Paste are `Ctrl-Shift-C` and `Ctrl-Shift-V` for terminal emulators.
 - Word movement is `Alt-B` and `Alt-F`, matching readline/zsh behavior.
@@ -116,19 +117,19 @@ Hold `NAV + SYM` together. This uses QMK tri-layer support.
 
 ```text
 ┌────┬────┬────┬────┬────┬────┐   ┌────┬────┬────┬─────┬─────┬────────┐
-│ F1 │ F2 │ F3 │ F4 │ F5 │ F6 │   │ F7 │ F8 │ F9 │ F10 │ F11 │ QK_BOOT│
+│ F1 │ F2 │ F3 │ F4 │ F5 │ F6 │   │ F7 │ F8 │ F9 │ F10 │ F11 │ F12    │
 ├────┼────┼────┼────┼────┼────┤   ├────┼────┼────┼─────┼─────┼────────┤
-│ -- │Caps│Rep │ARep│ -- │ -- │   │Prev│Play│Next│Mute │Vol- │ Vol+   │
+│ -- │Rep │ARep│ -- │ -- │ -- │   │Prev│Play│Next│Mute │Vol- │ Vol+   │
 ├────┼────┼────┼────┼────┼────┤   ├────┼────┼────┼─────┼─────┼────────┤
-│ -- │ -- │ -- │ -- │ -- │ -- │   │Bri-│Bri+│ -- │ --  │ --  │ --     │
+│BOOT│ -- │ -- │ -- │ -- │ -- │   │Bri-│Bri+│ -- │ --  │ --  │ --     │
 └────┴────┴────┴────┴────┴────┘   └────┴────┴────┴─────┴─────┴────────┘
 ```
 
-`QK_BOOT` is intentionally on a distant corner and requires `NAV + SYM + corner key`.
+`QK_BOOT` is intentionally on a bottom corner and requires `NAV + SYM + bottom-corner key`.
 
 ## Caps Word
 
-Caps Word is enabled.
+Caps Word is enabled, but there is no duplicate Caps Word key on Adjust.
 
 - Press both Shift keys together to activate Caps Word.
 - Idle timeout is 4000 ms.
@@ -137,12 +138,12 @@ Caps Word is enabled.
 
 ## Repeat Key
 
-Repeat Key is enabled on Adjust:
+Repeat Key is enabled on Adjust for a one-week trial:
 
 - `Rep`: `QK_REP`
 - `ARep`: `QK_AREP`
 
-If firmware headroom becomes tight in future versions, Repeat Key is the first optional feature to remove. Core layout, Caps Word, and OLED are higher priority.
+If it is not used regularly after a week, disable `REPEAT_KEY_ENABLE` and replace these positions with `KC_NO`. Core layout, Caps Word, and OLED are higher priority.
 
 ## OLED
 
@@ -230,18 +231,18 @@ vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = t
 vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next diagnostic" })
 ```
 
-## Tapping-Term Tuning
+## Tapping-Term Notes
 
-Starting values:
+Current values are retained for future experimentation:
 
 - `TAPPING_TERM = 180`
 - `QUICK_TAP_TERM = 120`
 
-Only `GUI/Escape` has per-key permissive hold. If Escape triggers Super accidentally, increase tapping term slightly or remove permissive hold for `GUI_ESC`.
+There are no Base tap-hold keys in this layout, so these settings should not affect normal typing. Keep the layout deterministic unless a future change has a clear ergonomic payoff.
 
 ## Recovery
 
-- Use `QK_BOOT` from `NAV + SYM + top-right corner` for the active/master half.
+- Use `QK_BOOT` from `NAV + SYM + bottom-left corner` for the active/master half.
 - If the other half does not enter bootloader, press its physical reset button and flash that side separately.
 - Bootmagic is enabled. The keyboard also supports boot/reset behavior from the physical reset controls near the TRRS jack.
 
@@ -267,11 +268,11 @@ rm keyboards/crkbd/keymaps/my_keymap/.gitignore
 
 ## Test Checklist
 
-- Base: Tab, Backspace, Space, Enter, Quote, both Shifts, thumb Ctrl, Alt, GUI/Escape.
+- Base: Esc, Backspace, Space, Enter, Quote, both Shifts, left/right pinky Ctrl, and thumb Alt/RAlt.
 - Rust symbols: `::`, `->`, `=>`, `<>`, `&`, `|`, `_`, `?`, `()`, `[]`, `{}`.
-- Terminal: `Ctrl-C`, `Ctrl-R`, `Ctrl-W`, `Ctrl-U`, `Ctrl-L`, `Alt-B`, `Alt-F`, terminal copy/paste.
+- Terminal: pinky `Ctrl-C`, `Ctrl-R`, `Ctrl-W`, `Ctrl-U`, `Ctrl-L`, thumb/layer `Alt-B`, `Alt-F`, terminal copy/paste.
 - tmux: prefix, send-prefix, copy mode, no stuck Ctrl, no XOFF freeze with `stty -ixon`.
 - Neovim: Escape, `[d`, `]d`, H/J/K/L arrows, no firmware `:q` injection.
 - i3: workspaces 1 through 10 with current Mod1 behavior.
 - Browser: previous tab, next tab, clipboard shortcuts, navigation keys.
-- Adjust: NAV + SYM, F1-F12, media, brightness, Caps Word, Repeat, protected `QK_BOOT`.
+- Adjust: NAV + SYM, F1-F12, media, brightness, Caps Word, Repeat, Alternate Repeat, protected `QK_BOOT`.

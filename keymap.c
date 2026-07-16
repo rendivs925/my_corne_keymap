@@ -14,11 +14,9 @@ enum custom_keycodes {
     PREV_DIAG = SAFE_RANGE,
     NEXT_DIAG,
     TMUX_COPY_MODE,
+    TMUX_SEND_PREFIX,
 };
 
-// Thumb philosophy: only Esc/Super is dual-role. Space, Enter, Quote, and alphas
-// stay deterministic for fast terminal and editor use.
-#define GUI_ESC LGUI_T(KC_ESC)
 #define NAV     TL_LOWR
 #define SYM     TL_UPPR
 
@@ -35,42 +33,52 @@ enum custom_keycodes {
 #define WORD_RIGHT A(KC_F)
 
 static void tap_clean_16(uint16_t keycode) {
-    const uint8_t saved_mods = get_mods();
+    const uint8_t saved_mods         = get_mods();
+    const uint8_t saved_weak_mods    = get_weak_mods();
     const uint8_t saved_oneshot_mods = get_oneshot_mods();
 
     clear_mods();
+    clear_weak_mods();
     clear_oneshot_mods();
+    send_keyboard_report();
     tap_code16(keycode);
     set_mods(saved_mods);
+    set_weak_mods(saved_weak_mods);
     set_oneshot_mods(saved_oneshot_mods);
+    send_keyboard_report();
 }
 
 static void tap_diag_sequence(uint16_t bracket_keycode) {
-    const uint8_t saved_mods = get_mods();
+    const uint8_t saved_mods         = get_mods();
+    const uint8_t saved_weak_mods    = get_weak_mods();
     const uint8_t saved_oneshot_mods = get_oneshot_mods();
 
     clear_mods();
+    clear_weak_mods();
     clear_oneshot_mods();
+    send_keyboard_report();
     tap_code16(bracket_keycode);
     tap_code(KC_D);
     set_mods(saved_mods);
+    set_weak_mods(saved_weak_mods);
     set_oneshot_mods(saved_oneshot_mods);
+    send_keyboard_report();
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_split_3x6_3(
-        KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,      KC_Y, KC_U, KC_I,    KC_O,   KC_P,    KC_BSPC,
+        KC_ESC,  KC_Q, KC_W, KC_E, KC_R, KC_T,      KC_Y, KC_U, KC_I,    KC_O,   KC_P,    KC_BSPC,
         KC_LSFT, KC_A, KC_S, KC_D, KC_F, KC_G,      KC_H, KC_J, KC_K,    KC_L,   KC_SCLN, KC_QUOT,
-        KC_LALT, KC_Z, KC_X, KC_C, KC_V, KC_B,      KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-                         KC_LCTL, NAV, KC_SPC,      KC_ENT, SYM, GUI_ESC
+        KC_LCTL, KC_Z, KC_X, KC_C, KC_V, KC_B,      KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RCTL,
+                         KC_LALT, NAV, KC_ENT,      KC_SPC, SYM, KC_RALT
     ),
 
     // NAV: browser/i3 on top, modifiers and HJKL-shaped arrows on home row,
     // diagnostics/tmux/clipboard plus word and page movement on bottom row.
     [_NAV] = LAYOUT_split_3x6_3(
-        TAB_PREV,  WM(KC_1), WM(KC_2), WM(KC_3), WM(KC_4), WM(KC_5),      WM(KC_6), WM(KC_7),    WM(KC_8),     WM(KC_9),  WM(KC_0), TAB_NEXT,
-        KC_NO,    KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  TERM_CLEAR,    KC_HOME,  KC_LEFT,     KC_DOWN,      KC_UP,    KC_RGHT,  KC_END,
-        TERM_CLEAR, PREV_DIAG, NEXT_DIAG, TMUX_COPY_MODE, TERM_COPY, TERM_PASTE,  KC_PGDN,  WORD_LEFT, WORD_RIGHT, KC_PGUP,  KC_BSPC, KC_DEL,
+        KC_TAB,   WM(KC_1), WM(KC_2), WM(KC_3), WM(KC_4), WM(KC_5),      WM(KC_6), WM(KC_7),    WM(KC_8),     WM(KC_9),  WM(KC_0), TAB_NEXT,
+        TAB_PREV, KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  TERM_CLEAR,    KC_LEFT,  KC_DOWN,     KC_UP,        KC_RGHT,  KC_HOME,  KC_END,
+        TMUX_SEND_PREFIX, PREV_DIAG, NEXT_DIAG, TMUX_COPY_MODE, TERM_COPY, TERM_PASTE,  WORD_LEFT, KC_PGDN, KC_PGUP, WORD_RIGHT, KC_BSPC, KC_DEL,
                                   KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS
     ),
 
@@ -84,21 +92,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // ADJ is protected behind NAV + SYM. QK_BOOT is intentionally on a corner.
     [_ADJ] = LAYOUT_split_3x6_3(
-        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,      KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  QK_BOOT,
-        KC_NO,   CW_TOGG, QK_REP,  QK_AREP, KC_NO,   KC_NO,      KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_BRID, KC_BRIU, KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,      KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+        KC_NO,   QK_REP,  QK_AREP, KC_NO,   KC_NO,   KC_NO,      KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU,
+        QK_BOOT, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_BRID, KC_BRIU, KC_NO,   KC_NO,   KC_NO,   KC_NO,
                                   KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS
     ),
 };
-
-bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case GUI_ESC:
-            return true;
-        default:
-            return false;
-    }
-}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!record->event.pressed) {
@@ -119,6 +118,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             tap_clean_16(C(KC_S));
             wait_ms(10);
             tap_clean_16(KC_LBRC);
+            return false;
+
+        case TMUX_SEND_PREFIX:
+            // Sends prefix, then prefix again. With `bind C-s send-prefix`, tmux forwards Ctrl-S.
+            tap_clean_16(C(KC_S));
+            wait_ms(10);
+            tap_clean_16(C(KC_S));
             return false;
     }
 
