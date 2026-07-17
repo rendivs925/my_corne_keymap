@@ -31,6 +31,8 @@ enum custom_keycodes {
 #define TERM_CLEAR C(KC_L)
 #define TERM_COPY  C(S(KC_C))
 #define TERM_PASTE C(S(KC_V))
+#define UNDO       C(KC_Z)
+#define REDO       C(S(KC_Z))
 #define WORD_LEFT  A(KC_B)
 #define WORD_RIGHT A(KC_F)
 
@@ -78,9 +80,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // NAV: browser/i3 on top, modifiers and HJKL-shaped arrows on home row,
     // diagnostics/tmux/clipboard plus word and page movement on bottom row.
     [_NAV] = LAYOUT_split_3x6_3(
-        KC_TRNS,  WM(KC_1), WM(KC_2), WM(KC_3), WM(KC_4), WM(KC_5),      WM(KC_6), WM(KC_7),    WM(KC_8),     WM(KC_9),  TAB_PREV, TAB_NEXT,
-        TAB_BACK, KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  TERM_CLEAR,    KC_LEFT,  KC_DOWN,     KC_UP,        KC_RGHT,  KC_HOME,  KC_END,
-        TERM_CLEAR_CMD, PREV_DIAG, NEXT_DIAG, TMUX_COPY_MODE, TERM_COPY, TERM_PASTE,  WORD_LEFT, KC_PGDN, KC_PGUP, WORD_RIGHT, KC_BSPC, KC_DEL,
+        TAB_PREV, WM(KC_1), WM(KC_2), WM(KC_3), WM(KC_4), WM(KC_5),      WM(KC_6), WM(KC_7),    WM(KC_8),     WM(KC_9),  PREV_DIAG, NEXT_DIAG,
+        TAB_NEXT, KC_LGUI,  KC_LALT,  KC_LCTL,  KC_LSFT,  TERM_CLEAR,    KC_LEFT,  KC_DOWN,     KC_UP,        KC_RGHT,  KC_HOME,  KC_END,
+        TERM_CLEAR_CMD, UNDO, REDO, TERM_COPY, TERM_PASTE, TMUX_COPY_MODE,  WORD_LEFT, KC_PGDN, KC_PGUP, WORD_RIGHT, KC_BSPC, KC_DEL,
                                   KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS
     ),
 

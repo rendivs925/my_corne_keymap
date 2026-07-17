@@ -30,19 +30,22 @@ Hold NAV + SYM    = ADJ
 Hold either `NAV/Esc`.
 
 ```text
-Tab       WM1  WM2  WM3  WM4  WM5      WM6   WM7   WM8   WM9   PrevTab  NextTab
-ShiftTab  GUI  Alt  Ctrl Shift C-l      Left  Down  Up    Right Home     End
-clear     [d   ]d   tmux[ Copy Paste    A-b   PgDn  PgUp  A-f   Bspc     Del
+PrevTab   WM1  WM2  WM3  WM4  WM5      WM6   WM7   WM8   WM9   [d       ]d
+NextTab   GUI  Alt  Ctrl Shift C-l      Left  Down  Up    Right Home     End
+clear     Undo Redo Copy Paste tmux[    A-b   PgDn  PgUp  A-f   Bspc     Del
 ```
 
 Common use:
 
 ```text
 Esc                 = tap NAV/Esc
-Tab                 = top-left key
-Shift-Tab           = NAV + LShift-position
-Browser prev tab    = NAV + P-position
-Browser next tab    = NAV + Backspace-position
+Tab                 = top-left key on Base
+Browser prev tab    = NAV + top-left
+Browser next tab    = NAV + LShift-position
+Undo                = NAV + S-position
+Redo                = NAV + D-position
+Diagnostics prev    = NAV + P-position
+Diagnostics next    = NAV + Backspace-position
 Arrows              = NAV + H/J/K/L
 Ctrl-L              = NAV + G-position
 clear + Enter       = NAV + bottom-left
@@ -124,8 +127,8 @@ Useful keyboard actions in Neovim:
 
 ```text
 Esc                 = tap NAV/Esc
-Diagnostics prev    = NAV + S-position
-Diagnostics next    = NAV + D-position
+Diagnostics prev    = NAV + P-position
+Diagnostics next    = NAV + Backspace-position
 Arrows              = NAV + H/J/K/L
 Page down/up        = NAV + J/K lower row positions
 ```

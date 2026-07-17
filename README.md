@@ -96,18 +96,18 @@ Hold either `NAV/Esc` thumb.
 
 ```text
 ┌─────────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────────┐
-│ Tab     │ WM1 │ WM2 │ WM3 │ WM4 │ WM5 │   │ WM6 │ WM7 │ WM8 │ WM9 │PrevT│ NextT   │
+│PrevT    │ WM1 │ WM2 │ WM3 │ WM4 │ WM5 │   │ WM6 │ WM7 │ WM8 │ WM9 │ [d  │ ]d      │
 ├─────────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────────┤
-│ShiftTab │ GUI │ Alt │ Ctrl│Shift│ C-l │   │Left │Down │ Up  │Right│Home │ End     │
+│NextT    │ GUI │ Alt │ Ctrl│Shift│ C-l │   │Left │Down │ Up  │Right│Home │ End     │
 ├─────────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────────┤
-│ clear   │ [d  │ ]d  │tmux[│Copy │Paste│   │A-b  │PgDn │PgUp │A-f  │Bspc │ Delete  │
+│ clear   │Undo │Redo │Copy │Paste│tmux[│   │A-b  │PgDn │PgUp │A-f  │Bspc │ Delete  │
 └─────────┴─────┴─────┴─────┴─────┴─────┘   └─────┴─────┴─────┴─────┴─────┴─────────┘
 ```
 
 Notes:
 - Esc is thumb-only: tap the `NAV/Esc` thumb key. Holding that same key activates NAV.
 - `PrevT` / `NextT` are browser/application previous and next tab: `Ctrl-Shift-Tab` and `Ctrl-Tab`.
-- `ShiftTab` is plain `Shift-Tab` for reverse completion, browser forms, and UI focus movement.
+- Top-left `PrevT` and second-row left `NextT` provide browser/application tab navigation for left-hand access.
 - Arrow keys use true Vim H/J/K/L geometry on the right hand: H=Left, J=Down, K=Up, L=Right. NAV is held by the opposite hand to reduce right-hand fatigue.
 - `C-l` sends `Ctrl-L` for terminal redraw/clear and browser address-bar focus.
 - `clear` types `clear` and presses Enter, which works reliably inside and outside tmux when the shell prompt is active.
@@ -279,5 +279,5 @@ rm keyboards/crkbd/keymaps/my_keymap/.gitignore
 - tmux: copy mode, terminal clear, no stuck Ctrl, no XOFF freeze with `stty -ixon`.
 - Neovim: thumb Escape, `[d`, `]d`, H/J/K/L arrows, no firmware `:q` injection.
 - i3: workspaces 1 through 9 on NAV, workspace 10 on Adjust, with current Mod1 behavior.
-- Browser: plain Tab, Shift-Tab, previous tab, next tab, clipboard shortcuts, navigation keys.
+- Browser: plain Tab on Base, previous tab, next tab, clipboard shortcuts, navigation keys.
 - Adjust: any NAV/Esc + SYM pair, F1-F12, media, brightness, Caps Word, Repeat, Alternate Repeat, protected `QK_BOOT`.
